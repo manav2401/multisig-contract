@@ -12,13 +12,13 @@ contract Multisig {
   Counters.Counter private transactionId;
 
   // owner mapping
-  mapping(address => bool) owner;
+  mapping(address => bool) private owner;
 
   // owners count
-  uint96 ownerCount;
+  uint96 private ownerCount;
 
   // number of signatures required
-  uint96 numberOfSignatures;
+  uint96 private numberOfSignatures;
 
   // Transaction object
   struct Transaction {
@@ -29,11 +29,11 @@ contract Multisig {
   }
 
   // id by transaction object
-  mapping(uint256 => Transaction) transactions;
+  mapping(uint256 => Transaction) private transactions;
 
   // mapping to check the signatures of each user for each transactions
   // id to owners to isSigned boolean
-  mapping(uint256 => mapping(address => bool)) isSigned;
+  mapping(uint256 => mapping(address => bool)) private isSigned;
 
   modifier onlyOwner() {
     require(owner[msg.sender], "Not Owner");
